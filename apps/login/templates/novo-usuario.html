@@ -1,0 +1,29 @@
+{% extends 'base-login.html' %}
+{% block title %}Cadastrar Novo Usuário{% endblock %}
+{% block content %}
+    <div class="auth-page">
+      <section class="auth-card auth-card-register">
+        <h1 class="auth-title">Cadastrar Novo Usuário</h1>
+        {% if error %}<p class="auth-error" role="alert">{{ error }}</p>{% endif %}
+        <form class="auth-form" action="" method="POST">
+          {% csrf_token %}
+          <div class="auth-field">
+            <label for="username">Nome de usuário:</label>
+            <input type="text" id="username" name="username" autocomplete="username" required>
+          </div>
+          <div class="auth-field">
+            <label for="password">Senha:</label>
+            <input type="password" id="password" name="password" autocomplete="new-password" required>
+          </div>
+          <div class="auth-field">
+            <label for="confirm_password">Confirme a senha:</label>
+            <input type="password" id="confirm_password" name="confirm_password" autocomplete="new-password" required>
+          </div>
+          <div class="auth-button-row">
+            <button class="auth-button auth-button-register" type="submit">Cadastrar novo usuário</button>
+          </div>
+        </form>
+        <p class="auth-footer">Já possui cadastro? <a href="{% url 'login' %}">Faça o login</a>.</p>
+      </section>
+    </div>
+{% endblock %}

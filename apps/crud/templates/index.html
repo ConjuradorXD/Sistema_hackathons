@@ -1,0 +1,47 @@
+{% extends 'base-crud.html' %}
+{% block title %}Registro de Itens | Início{% endblock %}
+{% block content %}
+    <div class="home-layout">
+        <section aria-labelledby="home-title">
+            <h1 id="home-title" class="home-title">Lista de itens mágicos:</h1>
+            <hr class="home-divider">
+            <div class="item-list">
+                {% for item in itens %}
+                    <article class="item-card">
+                        <div class="item-code">{{ item.codigo_item }}</div>
+                        <div class="item-data">
+                            <div class="item-info-line">
+                                <strong>Nome do item:</strong> {{ item.nome_item }} |
+                                <strong>Tipo de item:</strong> {{ item.tipo_item }} |
+                                <strong>Raridade:</strong> {{ item.raridade }}
+                            </div>
+                            <div class="item-info-line item-extra-info">
+                                <strong>Encontrado por:</strong> {{ item.nome_encontrador }} |
+                                <strong>Data:</strong> {{ item.data_encontrado|date:"d/m/Y" }}
+                            </div>
+                        </div>
+                        <div class="item-actions">
+                            <a class="btn btn-item-edit" href="{% url 'alterar_item' item.codigo_item %}">Alterar</a>
+                            <form action="{% url 'excluir_item' item.codigo_item %}" method="POST">
+                                {% csrf_token %}
+                                <button class="btn btn-item-delete" type="submit">Excluir</button>
+                            </form>
+                        </div>
+                    </article>
+                {% empty %}
+                    <p>Nenhum item cadastrado.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <hr class="home-divider">
+        <section class="home-info" aria-label="Sobre o sistema">
+            <h2 class="home-info-title">Sistema de Organização de itens da torre de Magia D</h2>
+            <p>Todos os itens encontrados em viagens e afins devem ser catalogados aqui para fins de estudo e organização.</p>
+        </section>
+
+        <div class="home-register">
+            <a class="btn btn-register-item" href="{% url 'novo-item' %}">Cadastrar novo item</a>
+        </div>
+    </div>
+{% endblock %}

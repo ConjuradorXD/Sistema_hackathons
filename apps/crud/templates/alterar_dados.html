@@ -1,0 +1,18 @@
+{% extends 'base-crud.html' %}
+{% load static %}
+{% block title %}Alterar dados do Item{% endblock %}
+{% block body_class %}item-form-body{% endblock %}
+{% block content %}
+<h1 class="mt-5">Alterar dados do Item</h1>
+<hr class="item-form-divider">
+{% if error %}<p>{{ error }}</p>{% endif %}
+<form class="item-form" action="{% url 'alterar_item' item.codigo_item %}" method="POST">
+    {% csrf_token %}
+    {% include 'includes/form.html' %}
+    <div class="d-flex justify-content-start mt-5 mb-5">
+        <button type="submit" class="btn btn-primary">Alterar</button>
+    </div>
+</form>
+
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}
